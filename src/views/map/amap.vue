@@ -21,7 +21,7 @@
 
 <script>
     import AMap from 'AMap';
-    import provinces from '../utils/marker';
+    import provinces from '../../utils/marker';
     export default {
         data () {
             return {

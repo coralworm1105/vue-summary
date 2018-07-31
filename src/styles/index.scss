@@ -1,16 +1,18 @@
+@import './variables.scss';
+@import './mixin.scss';
+@import './transition.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
-  padding:0;
-  margin:0;
 }
 
 html {
   box-sizing: border-box;
-  padding:0;
-  margin:0;
 }
 
 *,
@@ -46,38 +48,15 @@ a:hover {
     height: 0;
   }
 }
-div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
-  margin: 0;
-  padding: 0;
-  font-size: 1em;
-  font-family: "\82F9\65B9","\65B9\6B63\9ED1\4F53\7B80\4F53","\5FAE\8F6F\96C5\9ED1" ,sans-serif;
+
+//main-container全局样式
+.app-main{
+  min-height: 100%
 }
-ol, ul, li {
-  list-style: none;
+
+.app-container {
+  padding: 20px;
 }
-* {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -webkit-appearance: none;
-  -webkit-tap-highlight-color: transparent;
-}
-.clearfix:after{
-  display:block;
-  content:'.';
-  font-size:0;
-  height:0;
-  clear:both;
-}
-input::-webkit-input-placeholder{
-  color:#cdcdcd;
-}
-input::-moz-placeholder{   /* Mozilla Firefox 19+ */
-  color:#cdcdcd;
-}
-input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
-  color:#cdcdcd;
-}
-input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
-  color:#cdcdcd;
+.el-tooltip__popper {
+  max-width: 360px;
 }

@@ -8,7 +8,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import '@/styles/index.scss' // global css
 import '@/icons'
+import axios from './utils/axiosPlugin'
+// import './mock' // 该项目所有请求使用mockjs模拟
 
+Vue.use(axios)
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 /* eslint-disable no-new */

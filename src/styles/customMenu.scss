@@ -1,0 +1,348 @@
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  font-family: "\82F9\65B9","\65B9\6B63\9ED1\4F53\7B80\4F53","\5FAE\8F6F\96C5\9ED1" ,sans-serif;
+}
+ol, ul, li {
+  list-style: none;
+}
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.custom-memu {
+  font-size: 14px;
+  .menu_preview_area {
+    float: left;
+    margin-right: 12px;
+    position: relative;
+    .mobile_menu_preview {
+      position: relative;
+      width: 317px;
+      height: 580px;
+      background: transparent url(../../assets/bg_mobile_head_default39de72.png) no-repeat 0 0;
+      background-position: 0 0;
+      border: 1px solid #e7e7eb;
+      .mobile_hd {
+        color: #fff;
+        text-align: center;
+        padding-top: 30px;
+        font-size: 15px;
+        width: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-wrap: normal;
+        margin: 0 30px;
+      }
+      .pre_menu_list {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-top: 1px solid #e7e7eb;
+        background: transparent url(../../assets/bg_mobile_foot_default39de72.png) no-repeat 0 0;
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        padding-left: 43px;
+
+      }
+    }
+    .pre_menu_item {
+      position: relative;
+      float: left;
+      line-height: 50px;
+      text-align: center;
+      a {
+        display: block;
+        width: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-wrap: normal;
+        color: #616161;
+        font-size: 14px;
+        text-decoration: none;
+      }
+    }
+    .pre_menu_link {
+      border-left: 1px solid #e7e7eb;
+    }
+    .pre_menu_item:first-child .pre_menu_link {
+      border-left-width: 0;
+    }
+    .pre_menu_list.no_menu .pre_menu_item .pre_menu_link {
+      border: 1px solid #44b549;
+      color: #44b549;
+    }
+    .icon14_menu_add {
+      background: url(../../assets/index_z3a03e7.png) 0 0 no-repeat;
+      width: 14px;
+      height: 14px;
+      vertical-align: middle;
+      display: inline-block;
+      margin-top: -2px;
+    }
+    .pre_menu_list.no_menu .icon14_menu_add {
+      background: url(../../assets/index_z3a03e7.png) 0 -18px no-repeat;
+    }
+    .sub_pre_menu_box {
+      bottom: 60px;
+      background-color: #fafafa;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      border: 1px solid #d0d0d0;
+      border-top-width: 0;
+    }
+    .sub_pre_menu_list li {
+      line-height: 44px;
+      border: 1px solid transparent;
+      margin: 0 -1px -1px;
+    }
+    .sub_pre_menu_list li:first-child {
+      border-top: 1px solid #d0d0d0;
+    }
+    .sub_pre_menu_list li a {
+      padding: 0 .5em;
+    }
+    .sub_pre_menu_inner {
+      display: block;
+      border-top: 1px solid #e7e7eb;
+      width: auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-wrap: normal;
+      cursor: pointer;
+    }
+    .sub_pre_menu_list li:first-child .sub_pre_menu_inner {
+      border-top-width: 0;
+    }
+    .icon20_common {
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+      display: inline-block;
+      line-height: 100px;
+      overflow: hidden;
+    }
+    .icon20_common.sort_gray {
+      background: url(../../assets/base_z39f30a.png) 0 -4779px no-repeat;
+    }
+    .pre_menu_list .sort_gray {
+      display: none;
+      margin-top: -4px;
+    }
+    li.current {
+      background-color: #fff;
+      border: 1px solid #44b549;
+      position: relative;
+      z-index: 1;
+      line-height: 45px;
+    }
+    .size1of2 {
+      width: 50%;
+    }
+    .size1of3 {
+      width: 33.33%;
+    }
+    .sub_pre_menu_box .arrow {
+      position: absolute;
+      left: 50%;
+      margin-left: -6px;
+    }
+    .sub_pre_menu_box .arrow_out {
+      bottom: -7px;
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-width: 8px;
+      border-style: dashed;
+      border-color: transparent;
+      border-bottom-width: 0;
+      border-top-color: #d0d0d0;
+      border-top-style: solid;
+    }
+    .sub_pre_menu_box .arrow_in {
+      bottom: -5px;
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-width: 6px;
+      border-style: dashed;
+      border-color: transparent;
+      border-bottom-width: 0;
+      border-top-color: #fafafa;
+      border-top-style: solid;
+      margin-left: -4px;
+    }
+  }
+
+  .menu_form_area {
+    display: table-cell;
+    vertical-align: top;
+    float: none;
+    width: auto;
+    .menu_initial_tips {
+      text-align: center;
+      padding-top: 200px;
+    }
+    .tips_global {
+      color: #8d8d8d;
+      font-size: 14px;
+    }
+    .editor_inner {
+      height: 580px;
+      overflow: auto;
+      padding: 0 20px 5px;
+      padding-bottom: 20px;
+      background-color: #f4f5f9;
+      border: 1px solid #e7e7eb;
+      border-radius: 0;
+      -moz-border-radius: 0;
+      -webkit-border-radius: 0;
+      box-shadow: none;
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+    }
+
+  }
+  .menu_form_area:after {
+    content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ";
+    visibility: hidden;
+    clear: both;
+    height: 0 !important;
+    display: block;
+    line-height: 0;
+  }
+  .portable_editor {
+    position: relative;
+    padding-left: 12px;
+  }
+  .portable_editor.to_left .editor_arrow_wrp {
+    left: 0;
+    top: 534px;
+    position: absolute;
+  }
+  .portable_editor.to_left .editor_arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 12px;
+    border-style: dashed;
+    border-color: transparent;
+    border-left-width: 0;
+    border-right-color: #e7e7eb;
+    border-right-style: solid;
+    position: absolute;
+    left: 0;
+  }
+  .portable_editor.to_left .editor_arrow_in {
+    left: 1px;
+    border-right-color: #f4f5f9;
+  }
+  .menu_form_hd {
+    padding: 9px 0;
+    border-bottom: 1px solid #e7e7eb;
+  }
+  .global_mod.float_layout:after {
+    content: "\200B";
+    display: block;
+    height: 0;
+    clear: both;
+  }
+  .global_mod.float_layout .global_info {
+    float: left;
+  }
+  .global_mod .global_extra {
+    text-align: right;
+    a {
+      text-decoration: none;
+      color: #576b95;
+    }
+  }
+  .menu_form_hd h4 {
+    font-weight: 400;
+  }
+
+  .form-con {
+    padding-top: 20px;
+  }
+  .bottmo-tips{
+    margin-bottom: 0px;
+    margin-top: -10px;
+    color:#8d8d8d;
+  }
+  .menu_form_area .msg_sender_tips {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    color: #8d8d8d;
+  }
+  .type-con{
+    background: #fff;
+    padding: 20px;
+  }
+  .grid_line {
+    .no_extra.grid_item {
+      float: none;
+      width: auto;
+      overflow: hidden;
+    }
+  }
+  .media_cover{
+    width: 50%;
+    margin: 0 auto;
+    .create_access {
+      display: block;
+      border: 2px dotted #d9dadc;
+      text-align: center;
+      margin: 20px;
+      line-height: normal;
+      position: relative;
+      padding: 42px 0;
+    }
+    .create_access a {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 10px;
+      margin-right: 10px;
+      color: #8d8d8d;
+      font-size: 14px;
+      line-height: normal;
+    }
+    .create_access i {
+      cursor: pointer;
+      line-height: 300px;
+      overflow: hidden;
+    }
+    .icon36_common.add_gray {
+      background: url(../../assets/base_z39f30a.png) 0 -2548px no-repeat;
+    }
+    .icon36_common {
+      width: 36px;
+      height: 36px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+    .create_access a strong {
+      display: block;
+      padding-top: 3px;
+      font-weight: 400;
+      font-style: normal;
+    }
+  }
+  .el-dialog {
+    width: 900px;
+  }
+  .el-icon-warning{
+    font-size: 20px;
+    color: #e76b66;
+    margin-right: 12px;
+  }
+}

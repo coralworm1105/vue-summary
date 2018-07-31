@@ -2,12 +2,14 @@
   <div class="wrapper">
     <div class="screen-main">
       <div class="toolbar">
+        <label>添加元素</label>
         <el-button @click="addImg">添加图片</el-button>
+        <el-button @click="addChart">添加图表</el-button>
       </div>
       <div class="report">
         <template v-for="(item, index) in layout">
-          <vue-draggable-resizable class="vdr" :class="{'active': currentEle ? (currentEle.id === item.id) : false}" :active="currentEle ? (currentEle.id === item.id) : false" v-on:dragstop="onDragstop" v-on:resizestop="resizestop" :w="item.w" :h="item.h" :x="item.x" :y="item.y" :parent="true" :grid="[10,10]">
-            <div class="ele-box" v-on:click="onClick(index)" >{{index}}</div>
+          <vue-draggable-resizable class="vdr" :class="{'active': currentEle ? (currentEle.id === item.id) : false}" :active="currentEle ? (currentEle.id === item.id) : false" v-on:dragstop="onDragstop" v-on:resizestop="resizestop" :w="parseInt(item.w,10)" :h="parseInt(item.h,10)" :x="parseInt(item.x,10)" :y="parseInt(item.y,10)" :parent="true" :grid="[10,10]">
+            <div class="ele-box" v-on:mousedown="onEleActivate(index)" >{{index}}</div>
             <i class="el-icon-delete" @click="deleteEle(index)"></i>
           </vue-draggable-resizable>
         </template>
@@ -15,10 +17,10 @@
     </div>
     <div class="side-panel">
       <div v-if="currentEle">
-        <div>X: {{ currentEle.x }}</div>  
-        <div>Y: {{ currentEle.y }}</div>
-        <div>Width: {{ currentEle.w }}</div>
-        <div>Height: {{ currentEle.h }}</div>
+        <div>X: <el-input-number controls-position="right"  v-model="currentEle.x"></el-input-number></div>  
+        <div>Y: <el-input-number controls-position="right"  v-model="currentEle.y"></el-input-number></div>
+        <div>Width: <el-input-number controls-position="right"  v-model="currentEle.w" @change="handleChangeW"></el-input-number></div>
+        <div>Height: <el-input-number controls-position="right"  v-model="currentEle.h"></el-input-number></div>
       </div>
     </div>   
   </div>
@@ -47,21 +49,29 @@ export default{
       this.layout[this.currentIndex].w = width;
       this.layout[this.currentIndex].h = height;
       this.currentEle = this.layout[this.currentIndex];
+      console.log(this.currentIndex);
       console.log(JSON.stringify(this.layout));
+      this.modify();
     },
     onDragstop: function (x, y) {
-      console.log(this.currentIndex);
-      console.log(this.layout[this.currentIndex]);
       this.layout[this.currentIndex].x = x;
       this.layout[this.currentIndex].y = y;
       this.currentEle = this.layout[this.currentIndex];
       console.log(JSON.stringify(this.layout));
+      this.modify();
     },
-    onClick(index) {
+    onEleActivate(index) {
       this.currentIndex = index;
       this.currentEle = this.layout[index];
     },
+    modify() {
+      localStorage.setItem('layout', JSON.stringify(this.layout));
+    },
+    create() {
+      localStorage.setItem('layout', JSON.stringify(this.layout));
+    },
     addImg() {
+      console.log(this.layout);
       let ele = {
         "x": this.defaultX,
         "y": this.defaultY,
@@ -72,17 +82,33 @@ export default{
       this.currentEle = ele;
       this.layout.push(ele);
       this.currentIndex = this.layout.length - 1;
+      this.create();
+    },
+    addChart() {
+// 添加图表
     },
     deleteEle(i) {
       this.layout.splice(i,1);
       this.currentEle = null;
     },
     getLayout() {
-      this.layout = [{"x":10,"y":10,"w":400,"h":350,"id":0},{"x":510,"y":10,"w":400,"h":350,"id":1}];
+      if(localStorage.getItem('layout')){
+        this.layout = JSON.parse(localStorage.getItem('layout'));
+      }
+    },
+    handleChangeW(value){
+      this.currentEle.w = value;
+      this.layout[this.currentIndex].w = value;
+      console.log(this.layout);
     }
   },
   created() {
     this.getLayout();
+  },
+  watch: {
+    currentEle(oldVal, newVal) {
+      console.log(oldVal,newVal);
+    }
   }
 }; 
 </script>

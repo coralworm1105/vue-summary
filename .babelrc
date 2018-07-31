@@ -3,5 +3,8 @@
     ["env", { "modules": false }],
     "stage-2"
   ],
-  "plugins": ["transform-es2015-modules-commonjs"] //,"add-module-exports"
+  "plugins": [
+    "transform-es2015-modules-commonjs",
+    "transform-runtime"
+  ]
 }

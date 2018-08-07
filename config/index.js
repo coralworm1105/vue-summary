@@ -66,6 +66,11 @@ module.exports = {
         pathRewrite: {'^/dxss': '/dxss'},
         changeOrigin: true
       },
+      '/user': {
+        target: 'http://10.2.1.42:3000',
+        pathRewrite: {'^/user': '/user'},
+        changeOrigin: true
+      },     
       '/remote_sso_request/*': {
         target: 'http://sso.dev.adt100.net',
         // target:'http://sso007.adt100.com',

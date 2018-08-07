@@ -137,6 +137,21 @@ export default new Router({
           meta: {title:"图片", icon: 'tag', role: ['admin', 'editor']}
         }
       ]      
+    },
+    {
+      path: '/request',
+      name: 'request',
+      component: Layout,
+      showChild: true,
+      meta: {title:"request", icon: 'table', role: ['admin', 'editor']},
+      children: [
+        {
+          path: 'table',
+          name: 'table',
+          component: _import('request/table'),
+          meta: {title:"table", icon: 'tag', role: ['admin', 'editor']}
+        }
+      ]      
     }  
   ]
 })

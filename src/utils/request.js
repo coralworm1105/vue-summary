@@ -2,8 +2,6 @@ import axios from 'axios'
 import qs from 'qs'
 import { Message, Loading, MessageBox } from 'element-ui'
 import router from '../router'
-import MsgInner from 'MsgInner'
-import { getToken, removeIsLogin } from './auth'
 const wechatAppId = process.env.WX_APPID
 const Axios = axios.create({
   baseURL: '/', // 因为我本地做了反向代理
@@ -95,7 +93,7 @@ Axios.interceptors.response.use(
     }
     if (res.data && res.data.code !== 200) {
       if (res.data.code === 10000) {
-        removeIsLogin()
+        // removeIsLogin()
         router.push({
           path: '/login'
         })

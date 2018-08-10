@@ -1,9 +1,28 @@
 <template>
-<div>
-  <el-button type="primary" size="small" @click="showImportDialog=true;isEdit=false">新建</el-button>
+<div class="wrapper">
+  <div class="toolbar">
+    <el-button type="primary" size="small" @click="showImportDialog=true;isEdit=false">新建</el-button>
+    <el-upload
+      class=''
+      action='/user/upload'
+      :before-upload='beforeUpload'
+      :on-success='successUpload'
+      :on-error='failUpload'
+      multiple
+      :show-file-list='false'>
+      <span style='float:left;line-height:36px;'>选择文件：</span>
+      <el-input style='float:left;margin-right:10px;' v-model='fileName' readonly='' placeholder='选择图片'></el-input>
+      <el-button>上传文件</el-button>
+    </el-upload>
+  </div>
   <el-table class="table-border-top-none" :empty-text="tableTip" border stripe :data="list">
-    <el-table-column label="id" prop="studentId"></el-table-column>
-    <el-table-column label="姓名" prop="name" align='center'></el-table-column>
+    <el-table-column label="_id" prop="_id"></el-table-column>
+    <el-table-column label="姓名" prop="name"></el-table-column>
+    <el-table-column label="联系方式" prop="phone" align='center'></el-table-column>
+    <el-table-column label="email" prop="email" align='center'></el-table-column>
+    <el-table-column label="性别" prop="sex" align='center'></el-table-column>
+    <el-table-column label="年龄" prop="age" align='center'></el-table-column>
+    <el-table-column label="状态" prop="user_status" align='center'></el-table-column>
     <el-table-column label="操作" align='center'>
       <template slot-scope="scope">
           <el-button type="text" size="small" class="el-table-operation" @click.native.prevent="deleteRow(scope.$index, scope.row)">删除</el-button>
@@ -69,6 +88,8 @@ export default{
       tableTip: '',
       showImportDialog: false,
       isEdit: false,
+      fileName: '',
+      fileIds: [],
       // 表单数据对象
       personObj: {
         name: '',
@@ -241,7 +262,7 @@ export default{
         this.axios({
           method: 'post',
           url: '/user/del',
-          params: {
+          data: {
             '_id': row._id
           },
           hideError: true
@@ -271,9 +292,8 @@ export default{
         data: params
       }).then(res => {
         if (res.code === 200) {
-          this.$router.push({
-            path: '/request/table'
-          })
+          this.getList()
+          this.showImportDialog = false
         }
       })
     },
@@ -281,13 +301,12 @@ export default{
       this.axios({
         method: 'post',
         url: '/user/update',
-        contentType: 'application/json',
+        // contentType: 'application/json',
         data: this.personObj
       }).then(res => {
         if (res.code === 200) {
-          this.$router.push({
-            path: '/request/table'
-          })
+          this.getList()
+          this.showImportDialog = false
         }
       })
     },
@@ -303,10 +322,43 @@ export default{
           return false
         }
       })
-    },       
+    },
+    successUpload(res, file, fileList) {
+      if (res.code === 200) {
+        this.$message.success(res.msg)
+        // this.fileIds.push(res.data.id)
+        this.fileName = this.fileName + (this.fileName === '' ? '' : ';') + res.data.originName
+      } else {
+        fileList.splice(fileList.length - 1, 1)
+        this.$message.error(res.msg)
+      }
+    },
+    failUpload(res, file, fileList) {
+    },
+    beforeUpload(file) {
+      console.log(file.name)
+      const isJPEG = file.name.substr(file.name.length - 5, 5) === '.jpeg' || file.name.substr(file.name.length - 4, 4) === '.jpg'
+      const isPNG = file.name.substr(file.name.length - 4, 4) === '.png'
+      const isLt10M = file.size / 1024 / 1024 < 10
+      if (!isJPEG && !isPNG) {
+        this.$message.error('上传文件只能是jpeg或png格式!')
+      }
+      if (!isLt10M) {
+        this.$message.error('上传文件大小不能超过10MB!')
+      }
+      return (isJPEG || isPNG) && isLt10M
+    },          
   },
   created() {
     this.getList()
   },
 }
 </script>
+<style lang="scss">
+.wrapper{
+  padding:20px;
+  .toolbar{
+    padding-bottom:20px;
+  }
+}
+</style>

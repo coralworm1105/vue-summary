@@ -347,10 +347,25 @@ export default{
         this.$message.error('上传文件大小不能超过10MB!')
       }
       return (isJPEG || isPNG) && isLt10M
-    },          
+    },
+    getTest() {
+      this.axios({
+        url: '/example/query',
+        method: 'get',
+      }).then(r => {
+        // if (r.code === 200) {
+        //   this.list = r.data
+        // } else {
+        //   this.tableTip = '暂无数据'
+        // }
+      }).catch(r => {
+        // this.list = '加载失败'
+      })
+    },            
   },
   created() {
     this.getList()
+    this.getTest()
   },
 }
 </script>

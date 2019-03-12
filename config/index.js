@@ -70,7 +70,12 @@ module.exports = {
         target: 'http://10.2.1.42:3000',
         pathRewrite: {'^/user': '/user'},
         changeOrigin: true
-      },     
+      },
+      '/example': {
+        target: 'https://easy-mock.com/mock/5c497ed45c8b660be67b9a1c',
+        pathRewrite: {'^example': '/example'},
+        changeOrigin: true
+      },  
       '/remote_sso_request/*': {
         target: 'http://sso.dev.adt100.net',
         // target:'http://sso007.adt100.com',

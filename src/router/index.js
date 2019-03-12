@@ -152,6 +152,27 @@ export default new Router({
           meta: {title:"table", icon: 'tag', role: ['admin', 'editor']}
         }
       ]      
-    }  
+    },
+    {
+      path: '/question',
+      name: 'question',
+      component: Layout,
+      showChild: true,
+      meta: {title:"question", icon: 'table', role: ['admin', 'editor']},
+      children: [
+        {
+          path: 'index',
+          name: 'index',
+          component: _import('question/index'),
+          meta: {title:"index", icon: 'tag', role: ['admin', 'editor']}
+        },
+        {
+          path: 'requestAnimationFrame',
+          name: 'requestAnimationFrame',
+          component: _import('question/requestAnimationFrame'),
+          meta: {title:"requestAnimationFrame", icon: 'tag', role: ['admin', 'editor']}
+        }
+      ]      
+    }           
   ]
 })

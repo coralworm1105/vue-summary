@@ -126,6 +126,14 @@ export default {
       arr.forEach(item => s.add(item));
       return [...s].join("");
       // return [...s];
+    },
+    getEleCount(ele){
+      //统计数组或字符串中每个元素出现的次数
+      let arr = typeof(ele) === 'string' ? ele.split('') : ele;
+      return arr.reduce(function(res, cur) {
+          res[cur] ? res[cur] ++ : res[cur] = 1
+          return res;
+      }, {})      
     }
   },
   created() {
@@ -160,6 +168,8 @@ export default {
     console.log(c());
     console.log(c());
     console.log(c());
+    console.log('统计字符串中每个字母的数量:');
+    console.log(this.getEleCount('gaeerfaba'));
   },
 }
 </script>

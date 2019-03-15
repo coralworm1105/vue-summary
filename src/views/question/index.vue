@@ -134,6 +134,19 @@ export default {
           res[cur] ? res[cur] ++ : res[cur] = 1
           return res;
       }, {})      
+    },
+    testLet3(){
+      function b(){
+        var a = 1;
+        return ()=>{
+          a++;
+          return a;
+        }
+      }
+      let c = b();
+      console.log(c());
+      console.log(c());
+      console.log(c());      
     }
   },
   created() {
@@ -157,17 +170,7 @@ export default {
     // }
     // console.log(a,b);
     console.log(this.unique5(str));
-    function b(){
-      var a = 1;
-      return ()=>{
-        a++;
-        return a;
-      }
-    }
-    let c = b();
-    console.log(c());
-    console.log(c());
-    console.log(c());
+    this.testLet3();
     console.log('统计字符串中每个字母的数量:');
     console.log(this.getEleCount('gaeerfaba'));
   },

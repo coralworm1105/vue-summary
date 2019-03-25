@@ -147,6 +147,21 @@ export default {
       console.log(c());
       console.log(c());
       console.log(c());      
+    },
+  //防抖节流
+    debounce(fn, seconds){
+      var timer = null;
+      return function(){
+        var context = this;
+        var args = arguments;
+        if(timer){
+          clearTimeout(timer);
+          timer = null;
+        }
+        timer = setTimeout(function(){
+          fn.apply(context,args);
+        },seconds)
+      }
     }
   },
   created() {
@@ -169,10 +184,11 @@ export default {
     //   var b = 1;
     // }
     // console.log(a,b);
-    console.log(this.unique5(str));
+    this.unique5(str);
     this.testLet3();
     console.log('统计字符串中每个字母的数量:');
     console.log(this.getEleCount('gaeerfaba'));
+    this.debounce(this.testLet3);
   },
 }
 </script>

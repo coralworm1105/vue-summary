@@ -162,6 +162,20 @@ export default {
           fn.apply(context,args);
         },seconds)
       }
+    },
+    //拉平二维数组
+    reduceDimension(){
+      var arr = [[1,4,2],[4,2,78],[209,4,8]];
+      // let reduceArr = [];
+      let reduceArr2 = [];
+      let reduceArr3 = [];
+      // reduceArr = arr.flat();
+      reduceArr2 = Array.prototype.concat.apply([],arr);
+      for(let i in arr){
+        console.log(arr[i]);
+        reduceArr3 = reduceArr3.concat(arr[i]);
+      }
+      console.log(reduceArr2,reduceArr3);
     }
   },
   created() {
@@ -184,11 +198,12 @@ export default {
     //   var b = 1;
     // }
     // console.log(a,b);
-    this.unique5(str);
-    this.testLet3();
-    console.log('统计字符串中每个字母的数量:');
-    console.log(this.getEleCount('gaeerfaba'));
-    this.debounce(this.testLet3);
+    // this.unique5(str);
+    // this.testLet3();
+    // console.log('统计字符串中每个字母的数量:');
+    // console.log(this.getEleCount('gaeerfaba'));
+    // this.debounce(this.testLet3);
+    this.reduceDimension();
   },
 }
 </script>

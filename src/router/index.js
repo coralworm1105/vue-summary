@@ -171,6 +171,11 @@ export default new Router({
           name: 'requestAnimationFrame',
           component: _import('question/requestAnimationFrame'),
           meta: {title:"requestAnimationFrame", icon: 'tag', role: ['admin', 'editor']}
+        },{
+          path: 'scrollTopAb',
+          name: 'scrollTopAb',
+          component: _import('question/scrollTopAb'),
+          meta: {title:"scrollTopAb", icon: 'tag', role: ['admin', 'editor']}
         }
       ]      
     }           

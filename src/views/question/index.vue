@@ -2,15 +2,26 @@
 <div class="wrapper">
   <div class="block">版权所有 (c) 2009 Microsoft Corporation。保留所</div>  
   <div class="block2">版权所有 (c) 2009 Microsoft Corporation。保留所Compiled successfully in 1215ms</div> 
+  <el-button type="primary" @click="handleSubmit">提交</el-button>
+  <!-- <vue-scratch-card 
+      :element-id='scratchWrap'
+      :ratio=0.5
+      :move-radius=50
+  ></vue-scratch-card> -->
 </div>
 </template>
 <script>
+//import ScratchCard from 'scratch-card-y';
 export default {
+  name: 'app',
   data(){
     return{
 
     }
   },
+//  components:{
+//    ScratchCard: 'vue-scratch-card'
+//  },
   methods: {
     multiply() {
       const a = [1,2,3,4,5];
@@ -77,12 +88,13 @@ export default {
       let newObj = {};
       arr.sort();
       for(let i = 0 ; i < arr.length;i++){
-        if(arr[i] != arr[i-1] && arr[i] == arr[i+1]){
-          newObj[arr[i]] = 1;
-        } else {
+        // if(arr[i] != arr[i-1] && arr[i] == arr[i+1]){
+        //   newObj[arr[i]] = 1;
+        // } else {
           newObj[arr[i]] = newObj[arr[i]] ? ++newObj[arr[i]] : 1;
-        }
+        // }
       }
+      console.log(newObj)
       return newObj;
     },
     unique2(str) {
@@ -133,7 +145,7 @@ export default {
       return arr.reduce(function(res, cur) {
           res[cur] ? res[cur] ++ : res[cur] = 1
           return res;
-      }, {})      
+      }, {})
     },
     testLet3(){
       function b(){
@@ -151,7 +163,7 @@ export default {
   //防抖节流
     debounce(fn, seconds){
       var timer = null;
-      return function(){
+      // return function(){
         var context = this;
         var args = arguments;
         if(timer){
@@ -161,7 +173,7 @@ export default {
         timer = setTimeout(function(){
           fn.apply(context,args);
         },seconds)
-      }
+      // }
     },
     //拉平二维数组
     reduceDimension(){
@@ -172,10 +184,37 @@ export default {
       // reduceArr = arr.flat();
       reduceArr2 = Array.prototype.concat.apply([],arr);
       for(let i in arr){
-        console.log(arr[i]);
         reduceArr3 = reduceArr3.concat(arr[i]);
       }
       console.log(reduceArr2,reduceArr3);
+    },
+    shuffle(){
+      var arr = [1,45,7,8,2,8,34,67];
+      for(let i = arr.length - 1; i >= 0; i--){
+        let j = Math.floor(Math.random() * (i + 1));
+        let temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+      }
+      console.log(arr);
+      return arr;
+    },
+    splitThousands(){
+      //添加千位分隔符
+      let count = -43424290.3454;
+      let arr = count.toString().split(".");
+      let res = arr[0].replace(/\B(?=(\d{3})+$)/g, ',');
+      if(arr.length === 2){
+        res = res + '.' + arr[1];
+      }
+      console.log(res);
+      return res;
+    },
+    handleSubmit(){
+      this.debounce(this.submit,3000);
+    },
+    submit(){
+      console.log('submit');
     }
   },
   created() {
@@ -189,7 +228,7 @@ export default {
     // Array.from(kwList, item=>{
     //   arr.push(item.kwValue);
     // })
-    let str = '12qwe345671dsfa233dsf9876ds243dsaljhkjfzxcxzvdsf蓝天震月光手札最近的授业一';
+    let str = '12qwe345671dsfa233dsqf9876ds243dsaljhkjfzxcxqzvdsf蓝天震月光手札最近的授业一';
     // console.log(this.unique2(str));
     // console.log(this.unique3(str));
     // console.log(this.unique4(str));
@@ -198,28 +237,32 @@ export default {
     //   var b = 1;
     // }
     // console.log(a,b);
-    // this.unique5(str);
+    // this.unique(str);
     // this.testLet3();
     // console.log('统计字符串中每个字母的数量:');
     // console.log(this.getEleCount('gaeerfaba'));
     // this.debounce(this.testLet3);
     this.reduceDimension();
+    // this.shuffle();
+    // this.splitThousands();
   },
 }
 </script>
 <style lang="scss">
-.block{
-  width:200px;
-  overflow:hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-bottom:10px;
-}
-.block2{
-  width:200px;
-  overflow:hidden;
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orgin:vertical;
+.wrapper{
+  .block{
+    width:200px;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom:10px;
+  }
+  .block2{
+    width:200px;
+    overflow:hidden;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orgin:vertical;
+  }
 }
 </style>

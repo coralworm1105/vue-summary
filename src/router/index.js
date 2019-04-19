@@ -170,12 +170,19 @@ export default new Router({
           path: 'requestAnimationFrame',
           name: 'requestAnimationFrame',
           component: _import('question/requestAnimationFrame'),
-          meta: {title:"requestAnimationFrame", icon: 'tag', role: ['admin', 'editor']}
-        },{
+          meta: {title:"requestAnimationFrame用法", icon: 'tag', role: ['admin', 'editor']}
+        },
+        {
           path: 'scrollTopAb',
           name: 'scrollTopAb',
           component: _import('question/scrollTopAb'),
-          meta: {title:"scrollTopAb", icon: 'tag', role: ['admin', 'editor']}
+          meta: {title:"滚动吸顶", icon: 'tag', role: ['admin', 'editor']}
+        },
+        {
+          path: 'sort',
+          name: 'sort',
+          component: _import('question/sort'),
+          meta: {title:"排序方法总结", icon: 'tag', role: ['admin', 'editor']}
         }
       ]      
     }           

@@ -4,6 +4,7 @@
 <script>
 export default {
     methods: {
+        // 冒泡排序
         bubbleSort(arr){
             for(let i = 0;i < arr.length - 1;i++){
                 for(let j = 0; j < arr.length - 1 - i;j++){
@@ -17,6 +18,7 @@ export default {
             console.log(arr);
             return arr;
         },
+        // 选择排序
         selectionSort(arr){
             var minIndex,temp;
             for(let i = 0;i < arr.length - 1;i++){
@@ -33,6 +35,7 @@ export default {
             console.log(arr);
             return arr;
         },
+        // 插入排序
         insertionSort(){
             var len = arr.length;
             var preIndex, current;
@@ -48,6 +51,7 @@ export default {
             console.log(arr);
             return arr;
         },
+        //希尔排序
         shellSort(arr){
             var len = arr.length;
             for (var gap = Math.floor(len / 2); gap > 0; gap = Math.floor(gap / 2)) {
@@ -64,6 +68,7 @@ export default {
             }
             return arr;
         },
+        //归并排序
         mergeSort(arr) {
             var len = arr.length;
             if (len < 2) {

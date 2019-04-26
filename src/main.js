@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '@/styles/index.scss' // global css
 import '@/icons'
 import axios from './utils/axiosPlugin'
+import store from '@/store'
 // import './mock' // 该项目所有请求使用mockjs模拟
 
 Vue.use(axios)
@@ -18,6 +19,7 @@ Vue.use(ElementUI);
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

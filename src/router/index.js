@@ -183,6 +183,12 @@ export default new Router({
           name: 'sort',
           component: _import('question/sort'),
           meta: {title:"排序方法总结", icon: 'tag', role: ['admin', 'editor']}
+        },
+        {
+          path: 'storeDemo',
+          name: 'storeDemo',
+          component: _import('question/storeDemo'),
+          meta: {title:"store总结", icon: 'tag', role: ['admin', 'editor']}
         }
       ]      
     }           

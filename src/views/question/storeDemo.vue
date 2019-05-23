@@ -1,6 +1,6 @@
 <template>
  <div class="wrapper">
-    <!-- <el-input :value="message" @input="updateMessage"></el-input> -->
+    <el-input :value="message" @input="updateMessage"></el-input>
     <el-input :value="color"></el-input>
  </div>
 </template>
@@ -22,9 +22,10 @@ computed: {
   }
 },
     methods: {
-        // updateMessage(e){
-        //     this.$store.commit('updateMessage',e.target.value);
-        // }
+        updateMessage(e){
+            // this.$store.commit('updateMessage',e.target.value);
+            
+        }
     },
 }
 </script>

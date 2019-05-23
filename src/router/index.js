@@ -150,6 +150,12 @@ export default new Router({
           name: 'table',
           component: _import('request/table'),
           meta: {title:"table", icon: 'tag', role: ['admin', 'editor']}
+        },
+        {
+          path: 'userManage',
+          name: '用户管理',
+          component: _import('request/userManage/index'),
+          meta: {title:"用户管理", icon: 'tag', role: ['admin', 'editor']}
         }
       ]      
     },

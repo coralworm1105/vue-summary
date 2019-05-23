@@ -80,7 +80,8 @@
 </div>  
 </template>
 <script>
-import { MD5 } from '../../utils/md5'
+import { MD5 } from '../../utils/md5';
+import {fetchUserList} from '@apis/manage';
 export default{
   data() {
     return {
@@ -240,18 +241,26 @@ export default{
   },
   methods: {
     getList() {
-      this.axios({
-        url: '/user/list',
-        method: 'get',
-      }).then(r => {
-        if (r.code === 200) {
-          this.list = r.data
-        } else {
-          this.tableTip = '暂无数据'
-        }
-      }).catch(r => {
-        this.list = '加载失败'
-      })
+      // this.axios({
+      //   url: '/user/list',
+      //   method: 'get',
+      // }).then(r => {
+      //   if (r.code === 200) {
+      //     this.list = r.data
+      //   } else {
+      //     this.tableTip = '暂无数据'
+      //   }
+      // }).catch(r => {
+      //   this.list = '加载失败'
+      // })
+      fetchUserList({
+        keyword: '',
+        pageSize: 10,
+        pageNo: 1,
+        deptCode: ''
+      }, (res) => {
+        console.log(res.data);
+      });      
     },
     deleteRow(index, row) {
       this.$confirm('此操作将删除 ' + row.name + ' 的信息, 是否继续?', '提示', {

@@ -5,12 +5,13 @@
   "description": "A vue admin template with Element UI & axios & iconfont & permission control & lint",
   "author": "Pan <panfree23@gmail.com>",
   "scripts": {
+    "start": "concurrently \"npm run dev\" \"npm run mock\"",
     "dev": "node build/dev-server.js",
-    "start": "node build/dev-server.js",
     "build": "node build/build.js",
     "build-test": "node build/prodtest.js",
     "lint": "eslint --ext .js,.vue src",
     "test": "npm run lint",
+    "mock": "supervisor -w mock ./src/mocks/http.js",
     "pub": "npm run build && rm -rf pangu.tar.gz && tar -zvcf pangu.tar.gz dist",
     "pub-test": "npm run build-test && rm -rf dxss.tar.gz && tar -zvcf dxss.tar.gz dist"
   },
@@ -36,7 +37,8 @@
     "vue-image-crop-upload": "^2.5.0",
     "vue-router": "3.0.1",
     "vuex": "3.0.1",
-    "wangeditor": "^3.0.15"
+    "wangeditor": "^3.0.15",
+    "mockjs": "^1.0.1-beta3"
   },
   "devDependencies": {
     "autoprefixer": "7.1.6",
@@ -49,6 +51,7 @@
     "babel-register": "6.26.0",
     "browser-sync": "^2.26.3",
     "chalk": "2.3.0",
+    "concurrently": "^4.1.0",
     "connect-history-api-fallback": "1.5.0",
     "copy-webpack-plugin": "4.2.3",
     "css-loader": "0.28.7",
@@ -63,6 +66,7 @@
     "friendly-errors-webpack-plugin": "1.6.1",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.4.2",
+    "happypack": "^5.0.1",
     "html-webpack-plugin": "2.30.1",
     "http-proxy-middleware": "0.17.4",
     "json-server": "^0.12.1",

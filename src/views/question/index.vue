@@ -8,6 +8,7 @@
       :ratio=0.5
       :move-radius=50
   ></vue-scratch-card> -->
+  <el-input v-model="searchText"></el-input>
 </div>
 </template>
 <script>
@@ -16,7 +17,8 @@ export default {
   name: 'app',
   data(){
     return{
-
+      searchText: '',
+      obj: {}
     }
   },
 //  components:{
@@ -215,6 +217,9 @@ export default {
     },
     submit(){
       console.log('submit');
+    },
+    fetchUserList(){
+      console.log('fetchUserList');
     }
   },
   created() {
@@ -246,6 +251,23 @@ export default {
     // this.shuffle();
     // this.splitThousands();
   },
+  mounted() {
+    this.obj = {
+      a: '123'
+    };
+  },
+  watch: {
+    searchText: {
+      handler: 'fetchUserList',
+      immediate: true,
+    },
+    obj: {
+      handler(newObj, oldObj){
+        console.log('obj.a is changed');
+      },
+      deep: true
+    }
+  }  
 }
 </script>
 <style lang="scss">

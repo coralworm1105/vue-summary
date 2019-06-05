@@ -38,10 +38,7 @@ module.exports = {
       '@': resolve('src'),
       'MsgInner': '@/components/msg-inner/main.js',
       'MsgInnerPlugin': '@/components/msg-inner/index.js',
-      '@apis': path.join(__dirname, '../src/apis'),
-      '@configs': path.join(__dirname, '../src/configs'),
-      '@config': path.join(__dirname, '../src/configs/config.js'),
-      '@ajax': path.join(__dirname, '../src/configs/ajax.js')
+      '@style': path.join(__dirname, '../src/styles')
     }
   },
   module: {

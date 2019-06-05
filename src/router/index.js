@@ -11,11 +11,15 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
-      redirect: '/helloworld/index',
+      path: '/login',
+      component: _import('login/login')
     },
     {
-      path: '/helloworld',
+      path: '/',
+      redirect: '/login',
+    },
+    {
+      path: '/index',
       component: Layout,
       showChild: true,
       meta: { title: 'HelloWorld', icon: 'table', role: ['admin', 'editor']},

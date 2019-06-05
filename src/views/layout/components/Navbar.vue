@@ -1,11 +1,12 @@
 <template>
-  <el-menu class="navbar" mode="horizontal" :class="{'navbarDataAnalysis': $route.path === '/dataanalysis/index'}">
-    <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="true"></hamburger>
-    <span class="title">后台管理系统</span>
+  <el-menu class="navbar" mode="horizontal" >
+    <!-- <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger> -->
+    <a class="title" @click="goIndex">logo</a>
     <el-dropdown @command="handleCommand" class="current-user" trigger="click">
       <div class="user-info">
-        <img src="../../../assets/avatar.png" width="40" height="40">
-        <span>{{loginUsername}}</span>
+        <img v-if="user.userLogo" :src="host + user.userLogo + '?scale=0.8&quality=0.5'" width="40" height="40">
+        <img v-else src="../../../assets/avatar.png" width="40" height="40">
+        <span>{{ user.userName || loginUsername}}</span>
         <i class="el-icon-arrow-down"></i>
       </div>
       <el-dropdown-menu slot="dropdown">
@@ -17,6 +18,8 @@
 </template>
 
 <script>
+import GLOBAL from '../../../utils/global'
+import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 
@@ -27,22 +30,57 @@ export default {
   },
   data() {
     return {
+      host: GLOBAL.HOST,
       user: {}
     }
   },
   computed: {
     loginUsername() {
-      return 'admin'
-    }
-
+      return localStorage.getItem('loginUsername')
+    },
+    ...mapGetters([
+      'sidebar',
+      'avatar'
+    ])
   },
   methods: {
     handleCommand(command) {
+      if (command === 'modify') {
+        this.$router.push({
+          path: '/user/changepassword'
+        })
+      } else if (command === 'logout') {
+        this.logout()
+      }
+    },
+    goIndex() {
+      this.$router.push({
+        path: '/'
+      })
     },
     toggleSideBar() {
+      this.$store.dispatch('ToggleSideBar')
     },
     logout() {
+      this.$store.dispatch('LogOut').then(() => {
+        this.$store.commit('RESET_SIDEBAR')
+        this.$store.commit('RESET_USER')
+        this.$store.commit('RESET_PERMISSION')
+        this.$store.commit('RESET_CURRENT_NAME')
+        this.$router.push({
+          path: '/login'
+        })
+        // location.reload() // 为了重新实例化vue-router对象 避免bug
+      })
     }
+  },
+  created() {
+    //    this.axios({
+    //      method: 'post',
+    //      url: '/dxss/user/login/getDetail'
+    //    }).then(res => {
+    //      this.user = res.data
+    //    })
   }
 }
 </script>
@@ -67,11 +105,17 @@ export default {
   }
   .title {
     color: #fff;
-    font-size: 30px;
+    font-size: 18px;
+    padding-left:14px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .title:focus {
+    border: 0px;
   }
   .current-user {
     position: absolute;
-    right: 60px;
+    right: 20px;
     top: 0;
     font-size: 0;
     .user-info {
@@ -85,7 +129,7 @@ export default {
       span, i {
         margin-left: 10px;
         vertical-align: middle;
-        font-size: 18px;
+        font-size: 14px;
         color: #fff;
       }
     }

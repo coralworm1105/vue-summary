@@ -47,39 +47,9 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/oss/org/*': {
-        target: 'http://boss.dev.adt100.net',
-        pathRewrite: {'^/oss/org/': '/oss/org/'},
-        changeOrigin: true
-      },
-      '/oss/*': {
-        target: 'http://boss.dev.adt100.net',
-        pathRewrite: {'^/oss/': '/oss/'},
-        changeOrigin: true
-      },
-      '/dxss': {
-        // 1.2
-        // target: 'http://10.2.1.36:8080',
-        // target: 'http://10.2.30.191:38061',
-        target: 'http://10.2.30.191:58080',
-        // target: 'http://10.2.1.34:8070',
-        pathRewrite: {'^/dxss': '/dxss'},
-        changeOrigin: true
-      },
-      '/user': {
-        target: 'http://10.2.1.42:3000',
-        pathRewrite: {'^/user': '/user'},
-        changeOrigin: true
-      },
-      '/example': {
-        target: 'https://easy-mock.com/mock/5c497ed45c8b660be67b9a1c',
-        pathRewrite: {'^example': '/example'},
-        changeOrigin: true
-      },  
-      '/remote_sso_request/*': {
-        target: 'http://sso.dev.adt100.net',
-        // target:'http://sso007.adt100.com',
-        pathRewrite: {'^/remote_sso_request/': '/remote_sso_request/'},
+      '/api': {
+        target: 'https://www.easy-mock.com/mock/5c53e86a6ad2a8357e2c7255',
+        pathRewrite: {'^api': '/api'},
         changeOrigin: true
       }
     },

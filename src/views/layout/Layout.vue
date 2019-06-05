@@ -1,8 +1,8 @@
 <template>
-  <div class="app-wrapper" :class="">
-    <sidebar class="sidebar-container"></sidebar>
-    <div class="main-container" >
-      <navbar></navbar>
+  <div class="app-wrapper" :class="{hideSidebar:!sidebar.opened}">
+    <navbar></navbar>
+    <div class="main-container" :style="{'margin-left': layout.sidebar ? '180px' : '0px'}">
+      <sidebar class="sidebar-container" v-if="layout.sidebar"></sidebar>
       <app-main></app-main>
     </div>
   </div>
@@ -17,6 +17,14 @@ export default {
     Navbar,
     Sidebar,
     AppMain
+  },
+  computed: {
+    sidebar() {
+      return this.$store.state.app.sidebar
+    },
+    layout() {
+      return this.$store.state.app.layout
+    }
   }
 }
 </script>

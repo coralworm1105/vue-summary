@@ -32,14 +32,6 @@
   </div>    
 </template>
 <script>
-import {
-  fetchUserDepttList,
-  fetchUserList,
-  fetchUserDetail,
-  fetchUserDelete,
-  fetchRoleList,
-  fetchChangeUserStatus,
-} from '@apis/manage';
 export default {
   data(){
     return{

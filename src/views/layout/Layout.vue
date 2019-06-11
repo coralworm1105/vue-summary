@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper" :class="{hideSidebar:!sidebar.opened}">
     <navbar></navbar>
-    <div class="main-container" :style="{'margin-left': layout.sidebar ? '180px' : '0px'}">
+    <div class="main-container">
       <sidebar class="sidebar-container" v-if="layout.sidebar"></sidebar>
       <app-main></app-main>
     </div>

@@ -10,5 +10,7 @@ module.exports = merge(prodEnv, {
   WX_APPID: '"wxa2b43f80deee74aa"', //prod:wx4f018befa2bbba80 test:wxefe4a724baf241eb
   SHARE_HOST: '"http://pai.ailingyong.com"', // prod:http://pai.ailingyong.com test:http://test.ailingyong.com,
   ROOTP:'""',
-  ACFTICKET:'"acf_ticket"'
+  ACFTICKET:'"acf_ticket"',
+  baseUrl: '',
+  baseImgPath: ''
 })

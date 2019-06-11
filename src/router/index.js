@@ -147,19 +147,19 @@ export default new Router({
       name: 'request',
       component: Layout,
       showChild: true,
-      meta: {title:"request", icon: 'table', role: ['admin', 'editor']},
+      meta: {title:"商家管理", icon: 'table', role: ['admin', 'editor']},
       children: [
         {
           path: 'table',
           name: 'table',
           component: _import('request/table'),
-          meta: {title:"table", icon: 'tag', role: ['admin', 'editor']}
+          meta: {title:"商家列表", icon: 'tag', role: ['admin', 'editor']}
         },
         {
-          path: 'userManage',
-          name: '用户管理',
-          component: _import('request/userManage/index'),
-          meta: {title:"用户管理", icon: 'tag', role: ['admin', 'editor']}
+          path: 'addShop',
+          name: 'addShop',
+          component: _import('request/addShop'),
+          meta: {title:"添加商家", icon: 'tag', role: ['admin', 'editor']}
         }
       ]      
     },

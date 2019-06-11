@@ -1,379 +1,371 @@
 <template>
-<div class="wrapper">
-  <div class="toolbar">
-    <el-button type="primary" size="small" @click="showImportDialog=true;isEdit=false">新建</el-button>
-    <el-upload
-      class=''
-      action='/user/upload'
-      :before-upload='beforeUpload'
-      :on-success='successUpload'
-      :on-error='failUpload'
-      multiple
-      :show-file-list='false'>
-      <span style='float:left;line-height:36px;'>选择文件：</span>
-      <el-input style='float:left;margin-right:10px;' v-model='fileName' readonly='' placeholder='选择图片'></el-input>
-      <el-button>上传文件</el-button>
-    </el-upload>
-  </div>
-  <el-table class="table-border-top-none" :empty-text="tableTip" border stripe :data="list">
-    <el-table-column label="_id" prop="_id"></el-table-column>
-    <el-table-column label="姓名" prop="name"></el-table-column>
-    <el-table-column label="联系方式" prop="phone" align='center'></el-table-column>
-    <el-table-column label="email" prop="email" align='center'></el-table-column>
-    <el-table-column label="性别" prop="sex" align='center'></el-table-column>
-    <el-table-column label="年龄" prop="age" align='center'></el-table-column>
-    <el-table-column label="状态" prop="user_status" align='center'></el-table-column>
-    <el-table-column label="操作" align='center'>
-      <template slot-scope="scope">
-          <el-button type="text" size="small" class="el-table-operation" @click.native.prevent="deleteRow(scope.$index, scope.row)">删除</el-button>
-          <el-button type="text" size="small" class="el-table-operation" @click="editItem(scope.row)">编辑</el-button>
-        </template>
-    </el-table-column>
-  </el-table>
-  <el-dialog :visible.sync='showImportDialog' :close-on-click-modal='false'>
-    <el-form ref="person" :model="personObj" label-width="130px" style="padding-top:20px;">
-      <el-form-item label="姓名" prop="name">
-        <el-input style="width: 500px;" v-model.trim="personObj.name" placeholder='请输入姓名'></el-input>
-      </el-form-item>
-      <el-form-item label="密码"  prop="password" v-if="!isEdit">
-        <el-input style="width: 500px;" type="password" v-model.trim="personObj.password" placeholder='请输入密码'></el-input>
-      </el-form-item>
-      <el-form-item label="确认密码"  prop="repeatPassword" v-if="!isEdit">
-        <el-input style="width: 500px;" type="password" v-model.trim="personObj.repeatPassword" placeholder='请输入密码'></el-input>
-      </el-form-item>
-      <el-form-item label="手机号" prop="phone">
-        <el-input style="width: 500px;" type="text" v-model.trim="personObj.phone" placeholder='请输入手机号'></el-input>
-      </el-form-item>
-      <el-form-item label="邮箱" prop="email">
-        <el-input style="width: 500px;" type="text" v-model.trim="personObj.email" placeholder='请输入邮箱'></el-input>
-      </el-form-item>
-      <el-form-item label="性别" prop="sex">
-        <el-select v-model="personObj.sex" placeholder="请选择性别">
-          <el-option
-            label="男"
-            :value="1">
-          </el-option>
-          <el-option
-            label="女"
-            :value="2">
-          </el-option>
-
-        </el-select>
-      </el-form-item>
-      <el-form-item label="年龄" prop="age">
-        <el-input size="small" type="number" v-model.trim="personObj.age"></el-input>
-      </el-form-item>
-      <el-form-item label="状态" prop="user_status">
-        <el-switch
-          v-model="personObj.user_status"
-          :active-value="0"
-          :active-text="personObj.user_status === 0 ? '已激活' : '已停用'"
-          :inactive-value="1">
-        </el-switch>
-      </el-form-item>
-
-    </el-form>
-    <div slot='footer' class='dialog-footer' style='text-align:center;'>
-      <el-button class='btn-green btn-large' @click='submitDailog()'>提交</el-button>
+    <div class="fillcontain">
+        <div class="table_container">
+            <el-table
+                :data="tableData"
+                style="width: 100%">
+                <el-table-column type="expand">
+                  <template slot-scope="props">
+                    <el-form label-position="left" inline class="demo-table-expand">
+                      <el-form-item label="店铺名称">
+                        <span>{{ props.row.name }}</span>
+                      </el-form-item>
+                      <el-form-item label="店铺地址">
+                        <span>{{ props.row.address }}</span>
+                      </el-form-item>
+                      <el-form-item label="店铺介绍">
+                        <span>{{ props.row.description }}</span>
+                      </el-form-item>
+                      <el-form-item label="店铺 ID">
+                        <span>{{ props.row.id }}</span>
+                      </el-form-item>
+                      <el-form-item label="联系电话">
+                        <span>{{ props.row.phone }}</span>
+                      </el-form-item>
+                      <el-form-item label="评分">
+                        <span>{{ props.row.rating }}</span>
+                      </el-form-item>
+                      <el-form-item label="销售量">
+                        <span>{{ props.row.recent_order_num }}</span>
+                      </el-form-item>
+                      <el-form-item label="分类">
+                        <span>{{ props.row.category }}</span>
+                      </el-form-item>
+                    </el-form>
+                  </template>
+                </el-table-column>
+                <el-table-column
+                  label="店铺名称"
+                  prop="name">
+                </el-table-column>
+                <el-table-column
+                  label="店铺地址"
+                  prop="address">
+                </el-table-column>
+                <el-table-column
+                  label="店铺介绍"
+                  prop="description">
+                </el-table-column>
+                <el-table-column label="操作" width="300">
+                  <template slot-scope="scope">
+                    <el-button
+                      size="mini"
+                      @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                    <!-- <el-button
+                      size="mini"
+                      type="Success"
+                      @click="addFood(scope.$index, scope.row)">添加食品</el-button> -->
+                    <el-button
+                      size="mini"
+                      type="danger"
+                      @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                  </template>
+                </el-table-column>
+            </el-table>
+            <div class="Pagination">
+                <el-pagination
+                  v-if="pagination.total > 0"
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange"
+                  :current-page="pagination.pageNum"
+                  :page-size="20"
+                  layout="total, prev, pager, next"
+                  :total="pagination.total">
+                </el-pagination>
+            </div>
+            <el-dialog title="修改店铺信息" :visible.sync="dialogFormVisible">
+                <el-form :model="selectTable">
+                    <el-form-item label="店铺名称" label-width="100px">
+                        <el-input v-model="selectTable.name" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="详细地址" label-width="100px">
+                        <el-autocomplete
+                          v-model="address.address"
+                          :fetch-suggestions="querySearchAsync"
+                          placeholder="请输入地址"
+                          style="width: 100%;"
+                          @select="addressSelect"
+                        ></el-autocomplete>
+                        <span>当前城市：{{city.name}}</span>
+                    </el-form-item>
+                    <el-form-item label="店铺介绍" label-width="100px">
+                        <el-input v-model="selectTable.description"></el-input>
+                    </el-form-item>
+                    <el-form-item label="联系电话" label-width="100px">
+                        <el-input v-model="selectTable.phone"></el-input>
+                    </el-form-item>
+                    <el-form-item label="店铺分类" label-width="100px">
+                        <el-cascader
+                          :options="categoryOptions"
+                          v-model="selectedCategory"
+                          change-on-select
+                        ></el-cascader>
+                    </el-form-item>
+                    <el-form-item label="商铺图片" label-width="100px">
+                        <el-upload
+                          class="avatar-uploader"
+                          :action="baseUrl + '/v1/addimg/shop'"
+                          :show-file-list="false"
+                          :on-success="handleServiceAvatarScucess"
+                          :before-upload="beforeAvatarUpload">
+                          <img v-if="selectTable.image_path" :src="baseImgPath + selectTable.image_path" class="avatar">
+                          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
+                    </el-form-item>
+                </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="updateShop">确 定</el-button>
+              </div>
+            </el-dialog>
+        </div>
     </div>
-  </el-dialog>
-</div>  
 </template>
 <script>
-import { MD5 } from '../../utils/md5';
-export default{
-  data() {
-    return {
-      list: [],
-      tableTip: '',
-      showImportDialog: false,
-      isEdit: false,
-      fileName: '',
-      fileIds: [],
-      // 表单数据对象
-      personObj: {
-        name: '',
-        email: '',
-        password: '',
-        repeatPassword:'',
-        sex: 0,
-        age: 20,
-        user_status: 0
-      },      
-      // 表单验证规则
-      rules: {
-        name: [
-          {
-            required: true,
-            message: '请输入登录名',
-            trigger: 'blur'
-          },
-          {
-            validator: (rule, value, callback) => {
-              const reg = /^[0-9a-zA-Z]+$/
-              if (!reg.test(value)) {
-                callback(new Error('登录名必须为英文或数字'))
-              } else {
-                callback()
-              }
+    import {cityGuess, getResturants, getResturantsCount, foodCategory, updateResturant, searchplace, deleteResturant,baseUrl, baseImgPath} from '@/api/index'
+    export default {
+        data(){
+            return {
+                baseUrl: baseUrl,
+                baseImgPath: baseImgPath,                
+                city: {},
+                tableData: [],
+                pagination: {
+                  pageNum: 1,
+                  pageSize: 10,
+                  total: 0
+                },
+                tableLoading: false,
+                lastPage: 1,
+                selectTable: {},
+                dialogFormVisible: false,
+                categoryOptions: [],
+                selectedCategory: [],
+                address: {},
+            }
+        },
+        created(){
+            this.initData();
+        },
+        methods: {
+            initData(){
+                cityGuess().then(res => {
+                  if(res.code === 200){
+                    this.city = res.data;
+                    getResturantsCount().then(countData => {
+                      if(countData.code == 200){
+                        this.count = countData.count;
+                      }
+                    });
+                  }
+                })
+                this.getResturants();
             },
-            trigger: 'blur'
-          },
-          {
-            min: 3,
-            max: 20,
-            trigger: 'blur',
-            message: '登录名长度为3-20个字'
-          }
-        ],
-        phone: [
-          {
-            required: true,
-            message: '请输入手机号',
-            trigger: 'blur'
-          },
-          {
-            validator: (rule, value, callback) => {
-              const reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
-              if (!reg.test(value)) {
-                callback(new Error('请输入有效的手机号'))
-              } else {
-                callback()
-              }
-            },
-            trigger: 'blur'
-          }
-        ],
-        email: [
-          {
-            required: true,
-            message: '请输入邮箱',
-            trigger: 'blur'
-          },
-          {
-            min: 1,
-            max: 50,
-            trigger: 'blur',
-            message: '邮箱长度不能超过50个字'
-          },
-          {
-            validator: (rule, value, callback) => {
-              const reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-              if (!reg.test(value)) {
-                callback(new Error('请输入正确的邮箱'))
-              } else {
-                callback()
-              }
-            },
-            trigger: 'blur'
-          }
-        ],
-        password: [
-          {
-            required: true,
-            message: '请输入密码',
-            trigger: 'blur'
-          },
-          {
-            validator: (rule, value, callback) => {
-              const reg = /^[0-9a-zA-Z]+$/
-              if (reg.test(value) && value.length >= 6 && value.length <= 12) {
-                this.$refs.person.validateField('repeatPassword')
-                callback()
-              } else {
-                callback(new Error('密码必须为英文或数字，长度为6-12位'))
-              }
-              // if (!this.validatePass(value)) {
-              //   callback(new Error('密码需要8-16位，且必须包含大小写字母、数字、特殊字符中的任意两种!'))
-              // } else {
-              //   callback()
-              // }
-            },
-            trigger: 'blur'
-          }
-        ],
-        repeatPassword: [
-          {
-            required: true,
-            message: '请输入重复密码',
-            trigger: 'blur'
-          },
-          {
-            validator: (rule, value, callback) => {
-              const reg = /^[0-9a-zA-Z]+$/
-              if (value === this.personObj.password) {
-                if (reg.test(value) && value.length >= 6 && value.length <= 12) {
-                  callback()
-                } else {
-                  callback(new Error('密码必须为英文或数字，长度为6-12位'))
+            async getCategory(){
+                try{
+                    foodCategory().then(res => {
+                      if(res.code === 200){
+                        let categories = res.data.list;
+                        categories.forEach(item => {
+                            if (item.sub_categories.length) {
+                                const addnew = {
+                                    value: item.name,
+                                    label: item.name,
+                                    children: []
+                                }
+                                item.sub_categories.forEach((subitem, index) => {
+                                    if (index == 0) {
+                                        return
+                                    }
+                                    addnew.children.push({
+                                        value: subitem.name,
+                                        label: subitem.name,
+                                    })
+                                })
+                                this.categoryOptions.push(addnew)
+                            }
+                        })
+                      }
+                    })
+                    
+                }catch(err){
+                    console.log('获取商铺种类失败', err);
                 }
-                // if (!this.validatePass(value)) {
-                //   callback(new Error('密码需要8-16个字，且必须包含大小写字母、数字、特殊字符中的任意两种!'))
-                // } else {
-                //   callback()
-                // }
-              } else {
-                callback(new Error('确认密码与密码不一致'))
+            },
+            getResturants(){
+                const {latitude, longitude} = this.city;
+                getResturants({...this.pagination, latitude, longitude}).then(res => {
+                // getResturants(this.pagination).then(res => {
+                  console.log(res);
+                  this.tableData = [];
+                  if(res.code === 200){
+                    this.tableData = this.tableData.concat([], res.data.list);
+                    this.pagination.total = res.data.recordTotal
+                    this.lastPage = this.pagination.pageNum
+                  }
+                }).catch(e => {
+                  this.tableLoading = false
+                  this.pagination.pageNum = this.lastPage
+                });
+            },
+            // 更改每页条数
+            handleSizeChange(size) {
+              this.pagination.pageSize = size
+              if (this.pagination.pageNum * size - this.pagination.total <= size) {
+                this.getResturants()
               }
             },
-            trigger: 'blur'
-          }
-        ],
-        sex: [
-          {
-            type: 'number',
-            required: true,
-            message: '请选择性别',
-            trigger: 'change'
-          }
-        ],
-        user_status: [
-          {
-            type: 'number',
-            required: true,
-            message: '请选择状态',
-            trigger: 'change'
-          }
-        ]
-      }
+            // 更改页码
+            handleCurrentChange(page) {
+              this.pagination.pageNum = page
+              this.getResturants()
+            },
+            handleEdit(index, row) {
+                this.selectTable = row;
+                this.address.address = row.address;
+                this.dialogFormVisible = true;
+                this.selectedCategory = row.category.split('/');
+                if (!this.categoryOptions.length) {
+                    this.getCategory();
+                }
+            },
+            addFood(index, row){
+                this.$router.push({ path: 'addGoods', query: { restaurant_id: row.id }})
+            },
+            async handleDelete(index, row) {
+              this.$confirm('此操作将永久删除该店铺，是否继续？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+              }).then(() => {              
+                deleteResturant(row.id).then(res => {
+                  if (res.code == 200) {
+                      this.$message({
+                          type: 'success',
+                          message: '删除店铺成功'
+                      });
+                      this.tableData.splice(index, 1);
+                  }else{
+                    this.$message({
+                      type: 'error',
+                      message: err.message
+                  });
+                  }
+                });
+              });
+            },
+            async querySearchAsync(queryString, cb) {
+                if (queryString) {
+                    try{
+                        searchplace({
+                            type: 'search',
+                            city_id: this.city.id,
+                            keyword: queryString
+                        }).then(res => {
+                          if(res.code === 200){
+                            if (res.data.list instanceof Array) {
+                                res.data.list.map(item => {
+                                    item.value = item.address;
+                                    return item;
+                                })
+                                cb(res.data.list)
+                            }
+                          }
+                        });
+                    }catch(err){
+                        console.log(err)
+                    }
+                }
+            },
+            addressSelect(value){
+                const {address, latitude, longitude} = value;
+                this.address = {address, latitude, longitude};
+            },
+            handleServiceAvatarScucess(res, file) {
+                if (res.code === 200) {
+                    this.selectTable.image_path = res.image_path;
+                }else{
+                    this.$message.error('上传图片失败！');
+                }
+            },
+            beforeAvatarUpload(file) {
+                const isRightType = (file.type === 'image/jpeg') || (file.type === 'image/png');
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isRightType) {
+                    this.$message.error('上传头像图片只能是 JPG 格式!');
+                }
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                return isRightType && isLt2M;
+            },
+            async updateShop(){
+                this.dialogFormVisible = false;
+                try{
+                    Object.assign(this.selectTable, this.address);
+                    this.selectTable.category = this.selectedCategory.join('/');
+                    updateResturant(this.selectTable).then(res => {
+                      if (res.code == 200) {
+                          this.$message({
+                              type: 'success',
+                              message: '更新店铺信息成功'
+                          });
+                          this.getResturants();
+                      }else{
+                          this.$message({
+                              type: 'error',
+                              message: res.message
+                          });
+                      }
+                    })
+                }catch(err){
+                    console.log('更新餐馆信息失败', err);
+                }
+            },
+        }
     }
-  },
-  methods: {
-    getList() {
-      this.axios({
-        url: '/api/user/list',
-        method: 'get',
-      }).then(r => {
-        if (r.code === 200) {
-          this.list = r.data
-        } else {
-          this.tableTip = '暂无数据'
-        }
-      }).catch(r => {
-        this.list = '加载失败'
-      })     
-    },
-    deleteRow(index, row) {
-      this.$confirm('此操作将删除 ' + row.name + ' 的信息, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.axios({
-          method: 'post',
-          url: '/user/del',
-          data: {
-            '_id': row._id
-          },
-          hideError: true
-          // contentType: 'application/json'
-        }).then((res) => {
-          if (res.code === 200) {
-            this.getList()
-          } else if (res.code === 500) {
-            MessageBox.alert(res.msg)
-          }
-        })
-      })
-    },
-    editItem(row) {
-      this.isEdit = true;
-      this.showImportDialog = true;
-      this.personObj = Object.assign({}, row);
-    },
-    add() {
-      let params = Object.assign({}, this.personObj)
-      params.password = MD5(this.personObj.name + this.personObj.password + 'adtime.com')
-      params.repeatPassword = MD5(this.personObj.name + this.personObj.repeatPassword + 'adtime.com')
-      this.axios({
-        method: 'post',
-        url: '/user/create',
-        contentType: 'application/json',
-        data: params
-      }).then(res => {
-        if (res.code === 200) {
-          this.getList()
-          this.showImportDialog = false
-        }
-      })
-    },
-    update() {
-      this.axios({
-        method: 'post',
-        url: '/user/update',
-        // contentType: 'application/json',
-        data: this.personObj
-      }).then(res => {
-        if (res.code === 200) {
-          this.getList()
-          this.showImportDialog = false
-        }
-      })
-    },
-    submitDailog() {
-      this.$refs.person.validate(valid => {
-        if (valid) {
-          if (!this.isEdit) {
-            this.add()
-          } else {
-            this.update()
-          }
-        } else {
-          return false
-        }
-      })
-    },
-    successUpload(res, file, fileList) {
-      if (res.code === 200) {
-        this.$message.success(res.msg)
-        // this.fileIds.push(res.data.id)
-        this.fileName = this.fileName + (this.fileName === '' ? '' : ';') + res.data.originName
-      } else {
-        fileList.splice(fileList.length - 1, 1)
-        this.$message.error(res.msg)
-      }
-    },
-    failUpload(res, file, fileList) {
-    },
-    beforeUpload(file) {
-      console.log(file.name)
-      const isJPEG = file.name.substr(file.name.length - 5, 5) === '.jpeg' || file.name.substr(file.name.length - 4, 4) === '.jpg'
-      const isPNG = file.name.substr(file.name.length - 4, 4) === '.png'
-      const isLt10M = file.size / 1024 / 1024 < 10
-      if (!isJPEG && !isPNG) {
-        this.$message.error('上传文件只能是jpeg或png格式!')
-      }
-      if (!isLt10M) {
-        this.$message.error('上传文件大小不能超过10MB!')
-      }
-      return (isJPEG || isPNG) && isLt10M
-    },
-    getTest() {
-      this.axios({
-        url: '/example/query',
-        method: 'get',
-      }).then(r => {
-        // if (r.code === 200) {
-        //   this.list = r.data
-        // } else {
-        //   this.tableTip = '暂无数据'
-        // }
-      }).catch(r => {
-        // this.list = '加载失败'
-      })
-    },            
-  },
-  created() {
-    this.getList()
-    // this.getTest()
-  },
-}
 </script>
+
 <style lang="scss">
-.wrapper{
-  padding:20px;
-  .toolbar{
-    padding-bottom:20px;
-  }
-}
+    .demo-table-expand {
+        font-size: 0;
+    }
+    .demo-table-expand label {
+        width: 90px;
+        color: #99a9bf;
+    }
+    .demo-table-expand .el-form-item {
+        margin-right: 0;
+        margin-bottom: 0;
+        width: 50%;
+    }
+    .Pagination{
+        display: flex;
+        justify-content: center;
+        margin-top: 8px;
+    }
+    .avatar-uploader .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    .avatar-uploader .el-upload:hover {
+        border-color: #20a0ff;
+    }
+    .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 120px;
+        height: 120px;
+        line-height: 120px;
+        text-align: center;
+    }
+    .avatar {
+        width: 120px;
+        height: 120px;
+        display: block;
+    }
 </style>

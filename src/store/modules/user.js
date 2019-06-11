@@ -1,6 +1,5 @@
 import request from '@/utils/request'
 import { getToken, removeToken, setIsLogin, removeIsLogin } from '@/utils/auth'
-import GLOBAL from '@/utils/global'
 import { MD5 } from '@/utils/md5'
 
 const user = {

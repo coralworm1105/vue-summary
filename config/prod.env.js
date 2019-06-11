@@ -7,5 +7,7 @@ module.exports = {
   SSO_API_SERVER: '"http://api007.adt100.com"',
   SHARE_HOST:'"http://pai.ailingyong.com"',
   ROOTP:'""',
-  ACFTICKET:'"acf_ticket"'
+  ACFTICKET:'"acf_ticket"',
+  baseUrl: '',
+  baseImgPath: ''
 }

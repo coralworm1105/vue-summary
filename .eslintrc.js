@@ -30,6 +30,7 @@ module.exports = {
     //空行最多不能超过100行
     "no-multiple-empty-lines": [0, {"max": 100}],
     //关闭禁止混用tab和空格
-    "no-mixed-spaces-and-tabs": [0]
+    "no-mixed-spaces-and-tabs": [0],
+    "index":[2, 4],
   }
 }

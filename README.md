@@ -1,6 +1,6 @@
 # vue-summary
 
-> A Vue.js project
+> 常用正则校验、增删改查、css用例
 
 ## Build Setup
 
@@ -8,23 +8,19 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+#serve with hot reload at localhost:8083 and run mock
+npm run start
+
+# serve with hot reload at localhost:8083
 npm run dev
 
 # build for production with minification
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# 测试环境版本
+npm run build-test
 
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
+# run local mock application
+npm run mock
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

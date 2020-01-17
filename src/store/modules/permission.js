@@ -396,6 +396,7 @@ function getRouters(routers, menu, preUrl, parent) {
         menu[i].active = `${parent.active}-${(i + 1)}`
       }
     }
+    console.log(menu[i]);
     item = createRouter(menu[i])
     if (menu[i].subMenuList && menu[i].subMenuList.length > 0) {
       item.children = []
@@ -430,33 +431,35 @@ const permission = {
     GenerateRoutes({ commit }, data) {
       return new Promise((resolve, rj) => {
         request({
-          url: GLOBAL.API.GET_MENU_LIST,
+          url: "/mock/getMenu",
           method: 'get',
-          data: {}
+          params: {
+            token: data.token
+          }
         }).then(response => {
+          debugger
+          console.log(constantRouterMap);
           const accessedRouters = []
           getRouters(accessedRouters, response.data, '')
-          // 若配置了除权限管理、用户管理、日志管理外的模块，则跳转到/homepage,否则跳转到菜单的第一个模块
-          let homepageMenuList = []
-          for (let i = 0; i < accessedRouters.length; i++) {
-            if (indexIconList.indexOf(accessedRouters[i].path) > -1) {
-              homepageMenuList.push(accessedRouters[i].path)
-            }
-          }
-          let redirectPage = homepageMenuList.length > 0 ? '/homepage' : accessedRouters[0].path
           let router = {
             path: '/',
             component: Layout,
             name: '',
-            redirect: redirectPage,
+            redirect: accessedRouters[0].path,
             hidden: true
           }
-          // if (accessedRouters.length === 0) {
-          //   router.redirect = '/homepage'
-          // }
           accessedRouters.push(router)
-          // console.log(accessedRouters)
+          console.log(constantRouterMap);
+          try {
+            let alist = constantRouterMap.concat(accessedRouters);
+          } catch (error) {
+            console.log(error);
+          }
+          
+          console.log(alist);
           commit('SET_ROUTERS', accessedRouters)
+          console.log(constantRouterMap);
+          console.log(state.routers)
           resolve()
         }).catch(() => {
           rj()

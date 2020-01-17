@@ -146,6 +146,16 @@
         },
         created(){
             this.initData();
+            // this.axios({
+            //   url: '/mock/login',
+            //   method: 'post',
+            //   data: {
+            //     username:'1',
+            //     password: '1'
+            //   }
+            // }).then(res => {
+            //   console.log(res);
+            // })            
         },
         methods: {
             initData(){

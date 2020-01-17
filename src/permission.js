@@ -30,8 +30,11 @@ router.beforeEach((to, from, next) => {
       next({ path: '/' })
     } else {
       if (store.getters.addRouters.length === 0) {
-        store.dispatch('GenerateRoutes', {}).then(() => { // 生成可访问的路由表
+        store.dispatch('GenerateRoutes', {
+          token: localStorage.getItem('token')
+        }).then(() => { // 生成可访问的路由表
           router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
+          console.log(from.path);
           if (from.path === '/login') {
             next({ path: '/' }) // hack方法 确保addRoutes已完成 ,replace: true so the navigation will not leave a history record
             // to.path = '/?' + new Date().getTime()

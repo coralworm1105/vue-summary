@@ -51,6 +51,11 @@ module.exports = {
         target: 'https://www.easy-mock.com/mock/5c53e86a6ad2a8357e2c7255',
         pathRewrite: {'^api': '/api'},
         changeOrigin: true
+      },
+      '/mock': {
+        target: 'http://localhost:1111',
+        pathRewrite: {'^mock': '/mock'},
+        changeOrigin: true
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

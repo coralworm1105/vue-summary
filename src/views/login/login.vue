@@ -3,7 +3,7 @@
 	  	<transition name="form-fade" mode="in-out">
 	  		<section class="form_contianer" v-show="showLogin">
 		  		<div class="manage_tip">
-		  			<p>登录</p>
+		  			<!-- <p>登录</p> -->
 		  		</div>
 		    	<el-form :model="loginForm" :rules="rules" ref="loginForm">
 					<el-form-item prop="username">
@@ -16,9 +16,6 @@
 				    	<el-button type="primary" @click.native.prevent="submitForm('loginForm')" class="submit_btn">登陆</el-button>
 				  	</el-form-item>
 				</el-form>
-				<p class="tip">温馨提示：</p>
-				<p class="tip">未登录过的新用户，自动注册</p>
-				<p class="tip">注册过的用户可凭账号密码登录</p>
 	  		</section>
 	  	</transition>
   	</div>
@@ -31,8 +28,8 @@
 	    data(){
 			return {
 				loginForm: {
-					username: '',
-					password: '',
+					username: 'admin',
+					password: '123456',
 				},
 				rules: {
 					username: [
@@ -59,14 +56,15 @@
 				this.$refs[formName].validate(async (valid) => {
 					if (valid) {
 						this.$store.dispatch('Login',{
-							user_name: this.loginForm.username, 
+							username: this.loginForm.username, 
 							password: this.loginForm.password
 						}).then(res => {
-							if (res.status == 200) {
+              console.log(res);
+							if (res.code == 200) {
 								this.$message({
 									type: 'success',
 									message: '登录成功'
-								});
+                });
 								this.$router.push('/index')
 							}else{
 								this.$message({

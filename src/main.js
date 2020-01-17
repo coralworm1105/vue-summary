@@ -11,7 +11,7 @@ import '@/icons'
 import axios from './utils/axiosPlugin'
 import store from '@/store'
 // import './mock' // 该项目所有请求使用mockjs模拟
-// import '@/permission'
+import '@/permission'
 
 Vue.use(axios)
 Vue.config.productionTip = false

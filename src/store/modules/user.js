@@ -39,7 +39,7 @@ const user = {
       return new Promise((resolve, reject) => {
         request({
           // url: GLOBAL.API.POST_LOGIN,
-          url: '/api/login/authenticate',
+          url: '/mock/login',
           method: 'post',
           hideError: true,
           data: {
@@ -47,9 +47,11 @@ const user = {
             password
           }
         }).then(response => {
+          console.log(response);
           if (response.code === 200) {
             setIsLogin(true)
-            localStorage.setItem('loginUsername', username)
+            localStorage.setItem('loginUsername', username);
+            localStorage.setItem('token', response.data.token);
           }
           resolve(response)
         }).catch(error => {
@@ -57,7 +59,25 @@ const user = {
         })
       })
     },
-
+    GetMenu({commit}, data){
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/mock/getMenu',
+          method: 'get',
+          hideError: true,
+          params: {
+            token: data.token
+          }
+        }).then(res => {
+          if (res.code === 200) {
+            console.log(res);
+          }
+          resolve(res)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
     // 获取用户信息
     GetInfo({ commit }, userInfo) {
       const userMap = {

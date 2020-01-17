@@ -16,7 +16,7 @@
     "pub-test": "npm run build-test && rm -rf dxss.tar.gz && tar -zvcf dxss.tar.gz dist"
   },
   "dependencies": {
-    "axios": "0.17.1",
+    "axios": "0.18.1",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^3.4.1",
     "echarts": "^3.8.5",
